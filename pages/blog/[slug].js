@@ -3,6 +3,9 @@ import { serialize } from 'next-mdx-remote/serialize'
 import matter from 'gray-matter'
 import fs from 'fs'
 import path from 'path'
+import config from '../../config'
+
+const postsDirectory = config.postsDirectory
 
 const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
     return (
@@ -22,7 +25,7 @@ const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
   }
   
   const getStaticPaths = async () => {
-    const files = fs.readdirSync(path.join('posts'))
+    const files = fs.readdirSync(postsDirectory)
   
     const paths = files.map(filename => ({
       params: {
